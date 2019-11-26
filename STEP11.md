@@ -18,14 +18,14 @@ Triggers allow for the creation of an event-driven architecture. Openwhisk is ve
 
 2. Update the `manifest.yml` with the following, `triggers` will be at the same identation level as `actions`:
   
-  ```yaml
-  triggers:
-    fibonacciAdd: #Name of trrigger
-      feed: /[YOURACCOUNTNAME]_dev/go-serverless-cloudant/changes #fully qualified name of feed
-      inputs: 
-        dbname: fibonaccidb
-        lifecycleEvent: CREATE #Lifecycle event to check for
-  ```
+    ```yaml
+    triggers:
+      fibonacciAdd: #Name of trrigger
+        feed: /[YOURACCOUNTNAME]_dev/go-serverless-cloudant/changes #fully qualified name of feed
+        inputs: 
+          dbname: fibonaccidb
+          lifecycleEvent: CREATE #Lifecycle event to check for
+    ```
 
 ### Defining a Rule
 
