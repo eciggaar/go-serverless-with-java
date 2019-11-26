@@ -30,7 +30,7 @@ Triggers allow for the creation of an event-driven architecture. Openwhisk is ve
 
 Rules are a combination of a trigger and an action to run. We defined the trigger, now we need to create an action to be executed with the trigger is tripped. 
 
-1. Go to the toolchain and open the **Orion Web IDE** to create a new Java file called `ReadCloudantDoc.java` under the `com/example` package. we will simply read the raw value that was added to the database and write it to the log. Copy the following code into it:  
+1. Go to the [toolchain](https://cloud.ibm.com/devops/toolchains) and open the **Orion Web IDE** to create a new Java file called `ReadCloudantDoc.java` under the `com/example` package. we will simply read the raw value that was added to the database and write it to the log. Copy the following code into it:  
 
 	```java
 	package com.example;
