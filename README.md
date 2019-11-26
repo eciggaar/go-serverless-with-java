@@ -18,7 +18,7 @@ Before beginning this workshop there are a few actions you must complete. Expand
 	```
 	ibmcloud plugin install cloud-functions
 	```
-4. <a href="https://ibm.biz/Bd2Uv6" target="_blank">Create an IBM Cloud Account</a>
+4. <a href="https://ibm.biz/Bdz9G9" target="_blank">Create an IBM Cloud Account</a>
 
 </details>
 
