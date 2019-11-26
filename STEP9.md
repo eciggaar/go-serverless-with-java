@@ -29,7 +29,7 @@ An API Gateway can be a great way to make your functions and sequences more acce
 
 	![](images/view_api.png)
 
-4. This opens the management page for the API endpoint. Under **Route** is the route to the endpoint. Copy that value and append the endpoint path `ratio?number=5` to it. This will -- via the `ratioAPI` -- execute the `ratio` sequence with query parameter `number` set to 5. Test some other numbers as well and look how this changes the ratio. The bigger the number, the closer it gets to the golden ratio.
+4. This opens the management page for the API endpoint. Under **Route** is the route to the endpoint. Copy that value and append the endpoint path `/ratio?number=5` to it. This will -- via the `ratioAPI` -- execute the `ratio` sequence with query parameter `number` set to 5. Test some other numbers as well and look how this changes the ratio. The bigger the number, the closer it gets to the golden ratio.
 
 ### Rate Limiting 
 
