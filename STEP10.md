@@ -2,7 +2,7 @@
 
 IBM Cloud has a catalog of services available to handle many of the needs of an enterprise. One of the most common requirements of enterprises is the longterm persistence of business valuable information in a database. In this section we will walk through connecting our serverless functionss to a Cloudant instance. Cloudant is a NoSQL datastore, based on [CouchDB](https://couchdb.apache.org/).
 
-## Viewing Pre-Registered Packages
+### Viewing Pre-Registered Packages
 
 1. OpenWhisk on IBM Cloud comes with several pre-installed packages. These packages can help when interacting with common services like; messaging, IBM Watson, and datastores. You can view these packages by running the following command:
 	
@@ -53,11 +53,11 @@ ibmcloud fn package get /whisk.system/cloudant
 
 ---
 
-## Binding to a Cloudant Instance
+### Binding to a Cloudant Instance
 
 Let's create and bind a Cloudant instance to a package so we can start persisting data. 
 
-### Copying a Package
+#### Copying a Package
 
 First we must make a copy of the `/whisk.system/cloudant` package. This isn't strictly necessary for this workshop, but if we were to bind a Cloudant instance to `/whisk.system/cloudant`, then everyone would be writing to the same Cloudant instance which might not be what you want! 
 
@@ -73,7 +73,7 @@ First we must make a copy of the `/whisk.system/cloudant` package. This isn't st
 	ibmcloud fn package list
 	```
 
-### Creating a Cloudant Service Instance
+#### Creating a Cloudant Service Instance
 
 Next we need to create our Cloudant instance. This can be done through the IBM Cloud CLI.
 
@@ -85,7 +85,7 @@ Next we need to create our Cloudant instance. This can be done through the IBM C
 
 	This is necessary because our database will be created as resource in IBM Cloud, and resources are linked to a resource group.
 
-1. When creating our new Cloudant instance, be sure to replace `MY_REGION` in the command below with the [current region](region-list.md) you are working in:
+2. When creating our new Cloudant instance, be sure to replace `MY_REGION` in the command below with the [current region](region-list.md) you are working in:
 	
 	```
 	ibmcloud resource service-instance-create cloudant-serverless cloudantnosqldb lite MY_REGION -p '{"legacyCredentials": false}' 
@@ -93,7 +93,7 @@ Next we need to create our Cloudant instance. This can be done through the IBM C
 
 	This will create a Cloudant instance with the name `cloudant-serverless`.
 
-1. Next, we need to create service credentials so we can connect to this datastore. To do that, run the following command: 
+3. Next, we need to create service credentials so we can connect to this datastore. To do that, run the following command: 
 
 	```
 	ibmcloud resource service-key-create creds_cloudantserverless Manager --instance-name cloudant-serverless
@@ -101,7 +101,7 @@ Next we need to create our Cloudant instance. This can be done through the IBM C
 
 	The key `creds_cloudantserverless` gives Manager rights to the service instance `cloudant-serverless`.
 
-### Configuring the Package to Talk to a Database
+#### Configuring the Package to Talk to a Database
 	
 The package, we created earlier from `/whisk.system/cloudant`, contains the `write` action. It looks something like this:  
 
@@ -126,7 +126,7 @@ For `dbname` we can configure a package to pass in default parameters to actions
 	ibmcloud fn service bind cloudantnosqldb go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
 	```
 
-### Create a New Database
+#### Create a New Database
 
 1. Now that we've bound the package `go-serverless-cloudant` to our Cloudant instance, we can invoke the `create-database` action to create the database where we will be persisting our data to. For this, run the following command: 
 
@@ -142,11 +142,11 @@ For `dbname` we can configure a package to pass in default parameters to actions
 	}
 	```
 
-## Persisting to Cloudant
+### Persisting to Cloudant
 
 With our Cloudant instance created and configured, let's start persisting data to it. 
 	
-### Configuring a Sequence to Write to a Database
+#### Configuring a Sequence to Write to a Database
 
 1. The action `calculateRatio` is currently returning the value of `ratio`. To store this in Cloudant we will need to wrap this in an object call `doc`. This could be done directly in `calculateRatio`, but we want our functions to be atomic in their behavior. So instead let's create a new function called `buildCloudantDoc`. 
 
@@ -172,7 +172,7 @@ With our Cloudant instance created and configured, let's start persisting data t
 	
 	---
 	
-3. Next, update the `manifest.yml` file to declare this new action:
+2. Next, update the `manifest.yml` file to declare this new action:
 
 	```yaml
 	      cloudantDocBuilder:
@@ -181,16 +181,16 @@ With our Cloudant instance created and configured, let's start persisting data t
 	        main: com.example.BuildCloudantDoc 
 	```
 
-4. Finally, update the `ratio` sequence by adding the `cloudantDocBuilder` and `go-serverless-cloudant/write` actions:
+3. Finally, update the `ratio` sequence by adding the `cloudantDocBuilder` and `go-serverless-cloudant/write` actions:
 
 	```yaml
 	     ratio:
 	        actions: fibonacciNumber, calculateRatio, cloudantDocBuilder, go-serverless-cloudant/write
 	```
 
-5. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the [Working with Sequences](STEP8.md) section of this workshop if you're not sure anymore how to do this.
+4. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the [Working with Sequences](STEP8.md) section of this workshop if you're not sure anymore how to do this.
 
-### Testing the Updated Sequence
+#### Testing the Updated Sequence
 
 1. Everything should now be in place to test the updated `ratio` sequence. The sequence will persist the calculated ratio to the database. For this, run the following command:
 

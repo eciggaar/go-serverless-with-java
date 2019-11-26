@@ -49,7 +49,6 @@ Now select a favourite language using the dropdown (1). We've chosen for NodeJS 
 
 When there is input, the result is the same as for the `helloJava` function. Please see for yourself by invoking the `hello-world` function with some input as well. Next, let's add more value to our serverless functions by defining sequences.
 
-
 <p  align="center">
 	<font size="4">
  		<a href="STEP6.md"><< Back</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="README.md">Index</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="STEP8.md">Next >></a></td>

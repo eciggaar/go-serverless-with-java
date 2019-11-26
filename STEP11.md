@@ -1,9 +1,9 @@
 
-# 11. Creating a Rule
+## 11. Creating a Rule
 
 OpenWhisk supports the concept of rules. Rules are the combination of a trigger and an action to invoke when that trigger condition is met. Rules are a central concept when developing a serverless architecture by allowing actions andd sequences to be executed automatically. In this section we will look at how to create a trigger and combine it together with an action to create a rule. 
 
-## Defining a Trigger
+### Defining a Trigger
 
 Triggers allow for the creation of an event-driven architecture. Openwhisk is very flexible in how a triggering condition can be defined, it could be some external like time of day, or responding to changes in system state like a message being published to a queue, or as we will look at in this section a record being written to our Cloudant database. 
 
@@ -15,18 +15,19 @@ Triggers allow for the creation of an event-driven architecture. Openwhisk is ve
    ```
 	
 	The `changes` feed takes several parameters. `dbname` is already being supplied by the default parameter we setup in the previous step, along with `iamApiKey`, `iamUrl` which are supplied by the credntials we provided. `filter` and `query_params` can be supplied to provide more fine grained control over what events are pulled from the feed. Additionally feeds take a `lifecycleEvent` parameter, which has six values `CREATE`, `READ`, `UPDATE`, `DELETE`, `PAUSE`, or `UNPAUSE`. We will use the `CREATE` lifecycle. 
-	
-1. Update the `manifest.yml` with the following, `triggers` will be at the same identation level as `actions`:
 
-	```java
-	  	 triggers:
-	  	   fibonacciAdd: #Name of trrigger
-	  	     feed: /go-serverlesss-cloudant/changes #fully qualified name of feed
-	  	     inputs: 
-	  	     	 lifecycleEvent: CREATE #Lifecycle event to check for
- 	```
- 	
-## Defining a Rule
+2. Update the `manifest.yml` with the following, `triggers` will be at the same identation level as `actions`:
+  
+  ```yaml
+  triggers:
+    fibonacciAdd: #Name of trrigger
+      feed: /[YOURACCOUNTNAME]_dev/go-serverless-cloudant/changes #fully qualified name of feed
+      inputs: 
+        dbname: fibonaccidb
+        lifecycleEvent: CREATE #Lifecycle event to check for
+  ```
+
+### Defining a Rule
 
 Rules are a combination of a trigger and an action to run. We defined the trigger, now we need to create an action to be executed with the trigger is tripped. 
 
@@ -35,9 +36,7 @@ Rules are a combination of a trigger and an action to run. We defined the trigge
 	```java
 	package com.example;
 	
-	
 	import java.util.logging.Logger;
-	
 	import com.google.gson.JsonObject;
 	
 	public class ReadCloudantDoc {
@@ -51,6 +50,7 @@ Rules are a combination of a trigger and an action to run. We defined the trigge
 		   }  
 	}
 	```
+
 2. Create the new action  `readCloudantDoc` under `golden-ratio` that executes the Java class we just created:
 
 	```yaml
@@ -59,10 +59,11 @@ Rules are a combination of a trigger and an action to run. We defined the trigge
         runtime: java
         main: com.example.ReadCloudantDoc
 	```
+
 3. Finally we will define the rule with the following yaml. `rules` should also be at the same identation level as `actions`: 
 
 	```yaml
-	 rules:
+   rules:
       readFibonacciRatios:
         trigger: fibonacciAdd
         action: readCloudantDoc
@@ -70,7 +71,7 @@ Rules are a combination of a trigger and an action to run. We defined the trigge
 	
 4. [Commit and Sync Changes with your GitLab Repo](GIT.md)
 
-## Testing the Rule 
+### Testing the Rule 
 
 5. Once the build process has completed execute again the ratio sequence:
 
@@ -86,18 +87,18 @@ Rules are a combination of a trigger and an action to run. We defined the trigge
 	The first item in the output should look something like this this: 
 	
 	```
-Datetime            Activation ID                    Kind      Start Duration   Status  Entity
-2019-10-30 12:43:42 0eca8efbb51a40108a8efbb51ad010aa java      cold  344ms      success [ACCOUNTNAME]_dev/readCloudantDoc:0.0.6
-2019-10-30 12:43:41 49ecdaf0008e48d2acdaf0008ee8d268 unknown   warm  0s         success [ACCOUNTNAME]_dev/fibonacciAdd:0.0.2
-2019-10-30 12:43:41 ae1cc785c8944e119cc785c8948e1139 nodejs:10 cold  442ms      success [ACCOUNTNAME]_dev/write:0.0.180
-2019-10-30 12:43:40 791714e7533a47fb9714e7533a37fbab java      cold  317ms      success [ACCOUNTNAME]_dev/cloudantDocBuilder:0.0.10
-2019-10-30 12:43:39 d006f14575494e2786f1457549ce2722 java      cold  349ms      success [ACCOUNTNAME]_dev/calculateRatio:0.0.13
-2019-10-30 12:43:39 e7178dcd441f462e978dcd441f862ec4 java      cold  377ms      success [ACCOUNTNAME]_dev/fibonacciNumber:0.0.13
+  Datetime            Activation ID                    Kind      Start Duration   Status  Entity
+  2019-10-30 12:43:42 0eca8efbb51a40108a8efbb51ad010aa java      cold  344ms      success [ACCOUNTNAME]_dev/readCloudantDoc:0.0.6
+  2019-10-30 12:43:41 49ecdaf0008e48d2acdaf0008ee8d268 unknown   warm  0s         success [ACCOUNTNAME]_dev/fibonacciAdd:0.0.2
+  2019-10-30 12:43:41 ae1cc785c8944e119cc785c8948e1139 nodejs:10 cold  442ms      success [ACCOUNTNAME]_dev/write:0.0.180
+  2019-10-30 12:43:40 791714e7533a47fb9714e7533a37fbab java      cold  317ms      success [ACCOUNTNAME]_dev/cloudantDocBuilder:0.0.10
+  2019-10-30 12:43:39 d006f14575494e2786f1457549ce2722 java      cold  349ms      success [ACCOUNTNAME]_dev/calculateRatio:0.0.13
+  2019-10-30 12:43:39 e7178dcd441f462e978dcd441f862ec4 java      cold  377ms      success [ACCOUNTNAME]_dev/fibonacciNumber:0.0.13
 	```
 	
 	Copy the `Activation ID` from the first row in your output. 
 	
-7.  To view the log statement we wrote with the `readCloudantDoc` action run this command:
+7. To view the log statement we wrote with the `readCloudantDoc` action run this command:
 
 	```
 	ibmcloud fn activation logs RETURNED_ID
@@ -112,7 +113,7 @@ Datetime            Activation ID                    Kind      Start Duration   
 <details>
 <summary>Here is an expanded view of what the complete <code>manifest.yml</code> file should look like:</summary>
 
-```
+```yaml
 # wskdeploy manifest file
 
 packages:
@@ -177,7 +178,6 @@ packages:
         action: readCloudantDoc
 ```
 </details>
-
 
 <p  align="center">
 	<font size="4">
