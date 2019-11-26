@@ -14,7 +14,7 @@
 4. Clone repo:
 
 	```
-	git clone https://github.com/wkorando/go-serverless-with-java.git
+	git clone https://github.com/eciggaar/go-serverless-with-java.git
 	```
 5. Change directory to cloned repo:
 
