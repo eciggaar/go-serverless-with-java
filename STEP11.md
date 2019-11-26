@@ -85,18 +85,18 @@ Rules are a combination of a trigger and an action to run. We defined the trigge
 	```
 	
 	The first item in the output should look something like this this: 
-	
-	```
-  Datetime            Activation ID                    Kind      Start Duration   Status  Entity
-  2019-10-30 12:43:42 0eca8efbb51a40108a8efbb51ad010aa java      cold  344ms      success [ACCOUNTNAME]_dev/readCloudantDoc:0.0.6
-  2019-10-30 12:43:41 49ecdaf0008e48d2acdaf0008ee8d268 unknown   warm  0s         success [ACCOUNTNAME]_dev/fibonacciAdd:0.0.2
-  2019-10-30 12:43:41 ae1cc785c8944e119cc785c8948e1139 nodejs:10 cold  442ms      success [ACCOUNTNAME]_dev/write:0.0.180
-  2019-10-30 12:43:40 791714e7533a47fb9714e7533a37fbab java      cold  317ms      success [ACCOUNTNAME]_dev/cloudantDocBuilder:0.0.10
-  2019-10-30 12:43:39 d006f14575494e2786f1457549ce2722 java      cold  349ms      success [ACCOUNTNAME]_dev/calculateRatio:0.0.13
-  2019-10-30 12:43:39 e7178dcd441f462e978dcd441f862ec4 java      cold  377ms      success [ACCOUNTNAME]_dev/fibonacciNumber:0.0.13
-	```
-	
-	Copy the `Activation ID` from the first row in your output. 
+		
+    ```
+    Datetime            Activation ID                    Kind      Start Duration   Status  Entity
+    2019-10-30 12:43:42 0eca8efbb51a40108a8efbb51ad010aa java      cold  344ms      success [ACCOUNTNAME]_dev/readCloudantDoc:0.0.6
+    2019-10-30 12:43:41 49ecdaf0008e48d2acdaf0008ee8d268 unknown   warm  0s         success [ACCOUNTNAME]_dev/fibonacciAdd:0.0.2
+    2019-10-30 12:43:41 ae1cc785c8944e119cc785c8948e1139 nodejs:10 cold  442ms      success [ACCOUNTNAME]_dev/write:0.0.180
+    2019-10-30 12:43:40 791714e7533a47fb9714e7533a37fbab java      cold  317ms      success [ACCOUNTNAME]_dev/cloudantDocBuilder:0.0.10
+    2019-10-30 12:43:39 d006f14575494e2786f1457549ce2722 java      cold  349ms      success [ACCOUNTNAME]_dev/calculateRatio:0.0.13
+    2019-10-30 12:43:39 e7178dcd441f462e978dcd441f862ec4 java      cold  377ms      success [ACCOUNTNAME]_dev/fibonacciNumber:0.0.13
+    ```
+
+    Copy the `Activation ID` from the first row in your output. 
 	
 7. To view the log statement we wrote with the `readCloudantDoc` action run this command:
 
@@ -109,6 +109,7 @@ Rules are a combination of a trigger and an action to run. We defined the trigge
 	```
 	2019-10-30T11:43:42.343318Z    stdout: Newly written value: {"changes":[{"rev":"1-79633dd03e0a332454ba6bfa8e0805f3"}],"dbname":"fibonaccidb","id":"adff3e188b184ef7adb25ae987912d3b","seq":"4-g1AAAAYoeJyt1M1NwzAUB3DTIiFOdAO4gpTizzg50Q1gA7D9XJWqTRBtzrABbAAbwAawAWxAN4ANSoIrGlMVJW0vjhTJv7_fe3EGCKFWrwnoELRJr20HNG_rYWBMkI2CUZqNewElbTNIM1DJuJ3Y8SDf0lBI702n036vqRrD_MUONtpEjNeB_FhWJVa38lXvz5LRT7KwXOEuBbSbJWC7l4mFQj76lQmtRB8U9PGM3nI0gDFa18L8quJK0biIPvGq0qGQIYO_VdUck-4U8qknAzG8y9hyudokzgr53JMZpySiYu1JXBR06tEYOMlPvfzQ1Rp9Vcg3nqw0FvS_dlRqdLKdr-g2f-T43VwP41BKFa3ZbKffO_2h9JFAKIhYOHvdhjv-0fFPpdZIZkDxNZvu9Genv8wvl5Q0BrB1vJUH8-rS3-a1Uak4XfxrrDSYd6d_lHQWCYvJZgYzcfxn6TZYQjGzGxnMl9NLN4LGVOJQlfX-N2uR6kQ"}
 	```
+
 ## The Manifest YAML
 <details>
 <summary>Here is an expanded view of what the complete <code>manifest.yml</code> file should look like:</summary>
