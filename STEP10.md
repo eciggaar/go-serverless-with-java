@@ -150,7 +150,7 @@ With our Cloudant instance created and configured, let's start persisting data t
 
 1. The action `calculateRatio` is currently returning the value of `ratio`. To store this in Cloudant we will need to wrap this in an object call `doc`. This could be done directly in `calculateRatio`, but we want our functions to be atomic in their behavior. So instead let's create a new function called `buildCloudantDoc`. 
 
-	For this, go to the toolchain and open the **Orion Web IDE** and create a new Java file called `BuildCloudantDoc.java`. Copy the following code into it: 
+	For this, go to the [toolchain](https://cloud.ibm.com/devops/toolchains) and open the **Orion Web IDE** and create a new Java file called `BuildCloudantDoc.java`. Copy the following code into it: 
 
 	```java
 	package com.example;
