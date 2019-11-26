@@ -35,7 +35,7 @@ An API Gateway can be a great way to make your functions and sequences more acce
 
 There are a number of ways you can configure your API. A common one would be rate limiting. Because with functions you are paying for every CPU cycle, limiting the number of times a function can be executed can be a great way of making sure you don't get stuck with a huge bill at the end of the month -- because e.g. a script or application got stuck in an endless loop. 
 
-1. As rate limiting is measured per API key, we first need to set security on the API and create a key to access our API. For this, click the API on the [Functions API Management](https://cloud.ibm.com/functions/apimanagement) page.
+1. As rate limiting is measured per API key, we first need to set security on the API and create a key to access our API. For this, open the API via the [Functions API Management](https://cloud.ibm.com/functions/apimanagement) page.
 	
 	![](images/api_definition.png)
 
