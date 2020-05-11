@@ -1,7 +1,7 @@
 ## 0. Workshop Setup
-1. Go to this link and create an IBM Cloud Account: https://ibm.biz/BdqRFh.
+1. Go to this link and create an IBM Cloud Account: https://ibm.biz/BdqyTU.
 
-2. If you already have an account, go to the same [link](https://ibm.biz/BdqRFh) and click **Log in** on the top right of the page to continue.
+2. If you already have an account, go to the same [link](https://ibm.biz/BdqyTU) and click **Log in** on the top right of the page to continue.
 
 3. Once logged in, open an IBM Cloud Shell by clicking (1)
 

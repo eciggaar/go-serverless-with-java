@@ -33,7 +33,7 @@ So far we have been executing functions synchronously with the `--result` tag. L
 	}
 	```
 
-	**Note:** Functions execute in asynchronous mode by default, you can also use the tag `--blocking` to explicitly invoke a function in asynchronous mode.
+	**Note:** Functions execute in asynchronous mode by default, you can also use the tag `--blocking` to explicitly invoke a function and wait for it to complete.
 
 ### Viewing Function Invocation Information
 
