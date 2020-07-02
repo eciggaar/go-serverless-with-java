@@ -164,8 +164,8 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 	```yaml
 	sequences:
       ratio:
-		actions: fibonacciNumber, calculateRatio
-		web: true
+        actions: fibonacciNumber, calculateRatio
+        web: true
       ratioWeb:
         actions: fibonacciNumber, calculateRatioWeb
         web: true
